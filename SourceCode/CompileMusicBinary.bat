@@ -1,0 +1,1 @@
+vasmm68k_mot -o C:/OnlineRepositories/Megadrive/ROMS/MusicBinary.bin -Fbin -spaces SourceCode/stub_compile_music_binary.X68

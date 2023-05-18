@@ -1,0 +1,168 @@
+﻿mPICKUP
+// v1.1.0 - using this for perma-items
+bodge adds a light  beam
+myPlayer.plTotalLoot++;
+does something with perma-items. I dunno what they are
+things like Medallion of time, Ring of fire, also "myPlayer.plClass+1"
+COLLIDES WITH PLAYER
+
+mALTAR
+hit by bullets
+energy 32
+aicountdown 48 = time between hits allowed?
+used in quests
+
+mSKULL - normal enemy
+ - speed knocked back when hit 
+
+mITEM
+		various treasures etc.
+	subtype 0 HMONSTER_ITEM_TREASURE:
+		randomly get stuff
+	subtype 1 HMONSTER_ITEM_DIAMOND:
+		in shop - needs to buy
+		not in shop, score 10
+	HMONSTER_ITEM_GEMS (2)
+		in shop - needs to buy
+		not in shop, score 10
+	HMONSTER_ITEM_HEALTH (3)
+		in shop - needs to buy
+		not in shop, add 5*playerlevel (max 25) to health
+		(if class == 0) add double
+	HMONSTER_ITEM_COINS (4)
+		coins += 2
+		score += 2
+	HMONSTER_ITEM_XPSCROLL (5)
+		in shop - needs to buy
+		adds to experience, based on player class and next level up value
+	HMONSTER_ITEM_FULL_HEAL_POTION (6)
+		in shop - needs to buy
+		fills to max health
+	HMONSTER_ITEM_REGENERATION_POTION (7)
+		in shop - needs to buy
+		player.hasRegen added to depending on player class (200,280,320,300,280)
+	HMONSTER_ITEM_INVISIBLE_CLOAK (8)
+		in shop - needs to buy
+		player.hasCloak added to depending on player class (32,20,64,48,12)
+	HMONSTER_ITEM_LIGHTNING_RUNE (9)
+		in shop - needs to buy
+		tmpPlayer.setRune(Player.PL_LIGHTNING);
+	HMONSTER_ITEM_FIRE_RUNE (10)
+		in shop - needs to buy
+		tmpPlayer.setRune(Player.PL_FIRE);
+	HMONSTER_ITEM_KEY (11)
+		in shop - needs to buy
+		myPlayer.addKey(myWorld);
+	HMONSTER_ITEM_CUP_OF_LIFE (12)
+		in shop - needs to buy
+		myPlayer.hasCup=true;
+	HMONSTER_ITEM_WOOD_SHIELD (13)
+		in shop - needs to buy
+		tmpPlayer.setShield(0);
+	HMONSTER_ITEM_METAL_SHIELD (14)
+		in shop - needs to buy
+		tmpPlayer.setShield(1);
+	HMONSTER_ITEM_TITANIUM_SHIELD (15)
+		in shop - needs to buy
+		tmpPlayer.setShield(2);
+	HMONSTER_ITEM_LENS_OF_SECRET (16)
+		in shop - needs to buy
+		myPlayer.hasLensSecret=true;
+	HMONSTER_ITEM_RESURRECTION_RING (17)
+		in shop - needs to buy
+		myPlayer.hasResurrect=true;
+
+mDOOR
+	HMONSTER_DOOR_NORMAL (0)
+	HMONSTER_DOOR_SECRET (1)
+
+mEXIT
+	HMONSTER_EXIT_SHOP equ -1
+		aistate 6
+	HMONSTER_EXIT_BUILDING_EXIT equ -2
+		aistate 7
+	HMONSTER_EXIT_QUEST equ -3
+		aistate 8
+
+mFLAME
+	just flickers
+
+mORB
+	really not sure. Flies to player and gives experience or health?
+	spawned by killing mSKULLs
+	oh, are these the things rotating round the player?
+
+mCYCLOP
+	bigger monsters, similar to mSKULL though. Some shooting.
+	HMONSTER_CYCLOPS_CYCLOPS equ 0
+	HMONSTER_CYCLOPS_MINOTAUR equ 1
+	HMONSTER_CYCLOPS_SUMMONER equ 2
+	myPlayer.plCyclopEyes++; on death
+
+mSPIKES
+	subtypes different gfx?
+	can be hit by bullets
+	go up and down I think
+	health 32
+
+mWALLSPIKE
+	go in and out of wall
+	puts collision there when out
+
+mAVATAR
+	subType--; // substract 1 cause of the "empty shop"
+
+	HMONSTER_AVATAR_CAPTURED equ 98
+	HMONSTER_AVATAR_QUEST_HALL_CHAIR equ 99
+	HMONSTER_AVATAR_PRINCESS equ 100
+	HMONSTER_AVATAR_SPRING_OF_LIFE equ 101
+	HMONSTER_AVATAR_STATUE equ 102
+	HMONSTER_AVATAR_ICE_CRYSTALS equ 103
+
+	AARGH
+	if (subType<99 && subType!=3) {
+	subType=myCanvas.getRandom(3);
+	if (subType==3) subType--;
+
+	Writes to collision at start
+
+	does some speech stuff
+
+mROCKO
+	maxSpeed=16;
+	maxEnergy=180+(myWorld.dungeonLevel<<3);
+	monster with jumping
+	cracks the rendermap floor.
+
+mFLAMEHEAD
+	HMONSTER_FLAMEHEAD_FLAMEHEAD equ 0
+	HMONSTER_FLAMEHEAD_ICEHEAD equ 1
+	another monster
+	drops flames / ice spikes
+
+mSWITCH
+	floor metally switches
+	when player steps on.
+	not sure what else it does
+	
+mKRAKEN
+	big monster
+	dont think its used
+
+mMEETSPAWN:
+	not sure. is this 'meat' spawner?
+	messes with background scroll
+
+mFLAMERTURRET
+	messes with background scroll
+	some kind of boss?
+
+mMEETBOY
+mMEETBOYTINY
+	boss spawns?
+
+mACID
+	hurts player
+	uses fx to render
+
+		
